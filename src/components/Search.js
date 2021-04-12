@@ -20,9 +20,12 @@ const Search = () => {
         };
 
         if(search) {
-            wikisearch();
-        }
-    
+            const timeoutID = setTimeout(() => wikisearch(), 500);
+            return () => {
+                clearTimeout(timeoutID);
+            }  
+        };
+     
     }, [search]);
 
     const renderedResults = results.map((results) => {

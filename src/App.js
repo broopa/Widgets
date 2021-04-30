@@ -3,6 +3,8 @@ import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
+import Route from './components/Route';
+import Header from './components/Header';
 
 const options = [
     { 
@@ -35,12 +37,37 @@ const items =[
     },
 ];
 
+const showAccordion = () => {
+    if (window.location.pathname === '/')
+    return (
+        <div> <Accordion items={items} /></div>
+    );
+};
 
 export default () => {
+    const [selected,setSelected] = useState(options[0]);
 
     return (
         <div>
+            <Header />
+            <Route path="/">Blank Text</Route>
+            <Route path="/accordion">
+            <Accordion items={items} />
+            </Route>
+            <Route path="/wiki">
+            <Search />
+            </Route>
+            <Route path="/dropdown">
+            <Dropdown 
+            label="Select Color"
+            options={options}
+            selected={selected}
+            onSelectedChange={setSelected}
+            />
+            </Route>
+            <Route path="/translate">
             <Translate />
+            </Route>
         </div>
     );
 };
